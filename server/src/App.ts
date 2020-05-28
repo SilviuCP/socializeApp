@@ -5,6 +5,7 @@ import { mergeTypes, mergeResolvers, fileLoader } from "merge-graphql-schemas";
 import path from "path";
 import { makeExecutableSchema } from "graphql-tools";
 import models from "../models/index";
+import bodyParser from "body-parser";
 
 const server = express();
 server.get('/', (req, res) => {
@@ -18,7 +19,7 @@ const schema = makeExecutableSchema({
     typeDefs: schemas,
     resolvers,
 })
-server.use('/graphql', graphqlHTTP({
+server.use('/graphql', bodyParser.json(), graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
     graphiql: true,
