@@ -6,6 +6,7 @@ import path from "path";
 import { makeExecutableSchema } from "graphql-tools";
 import models from "../models/index";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 const server = express();
 server.get('/', (req, res) => {
@@ -19,6 +20,12 @@ const schema = makeExecutableSchema({
     typeDefs: schemas,
     resolvers,
 })
+
+server.use(cors({
+    origin: 'http://localhost:8080',
+    credentials: true
+}));
+
 server.use('/graphql', bodyParser.json(), graphqlHTTP({
     schema: schema,
     rootValue: resolvers,
