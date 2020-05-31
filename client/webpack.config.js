@@ -23,6 +23,7 @@ module.exports = {
                 use: {
                     loader: "babel-loader",
                     options: {
+                        plugins: ["transform-class-properties"],
                         presets: ['@babel/react', '@babel/typescript', '@babel/env']
                     }
                 }

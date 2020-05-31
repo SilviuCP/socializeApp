@@ -1,0 +1,105 @@
+.ProfilePage {
+    display: flex;
+    flex-direction: row;
+    top: 25%;
+    left: 50%;
+    .ProfilePage__ProfileCardContent {
+        display: flex;
+        margin-top: 2rem;
+        .Avatar {
+            width: 3rem;
+            height: 3rem;
+        }
+        .Name {
+            margin-top: 1rem;
+            margin-left: 1rem;
+        }
+    }
+
+    .ProfilePage__ProfileCardButtons {
+        float: right;
+        .button {
+            margin-bottom: 0.75rem;
+            margin-right: 0.75rem;
+            font-size: 0.75rem;
+        }
+    }
+
+    .CardSpace {
+        margin-top: 1rem;
+    }
+
+    .ProfilePage__PostNewCard {
+        position: relative;
+        display: flex;
+        .button {
+            margin-right: 0.25rem;
+            float: right;
+            position: absolute;
+            bottom: 0.25rem;
+            right: 0rem;
+            cursor: pointer;
+        }
+        .textField {
+            width: 85%;
+            margin-top: 0.75rem;
+            border-bottom: none;
+        }
+        .Avatar {
+            margin-top: 0.25rem;
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+        }
+    }
+
+    .ProfilePage__PostedCards {
+        display: flex;
+        flex-wrap: wrap;
+
+        .Image {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .Avatar {
+            margin-top: 0.25rem;
+            margin-left: 0.25rem;
+            margin-right: 0.25rem;
+        }
+
+        .Author {
+            margin-top: 0.25rem;
+            margin-left: 0.5rem;
+            float: right;
+            max-width: 100%;
+            min-width: 60%;
+        }
+
+        .Description {
+            flex-wrap: wrap;
+            margin-left: 1rem;
+            
+        }
+    }
+    .LikesAndCommentsSection {
+        .Likes {
+            margin-top: 1rem;
+            display: inline-flex;
+            float: left;
+            cursor: pointer;
+            .Icon {
+                margin-left: 1rem;
+            }
+        }
+        .Comments {
+            margin-right: 1rem;
+            margin-top: 1rem;
+            display: inline-flex;
+            float: right;
+            cursor: pointer;
+            .Icon {
+                margin-left: 1rem;
+            }
+        }
+    }
+}
