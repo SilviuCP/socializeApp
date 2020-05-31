@@ -4,7 +4,10 @@ export default {
     Query: {
         getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
         allUsers: (parent, args, { models }) => models.User.findAll(),
-        me: (parent, args, { req }) => req.user,
+        me: (parent, args, context) => {
+            console.log(context.getUser());
+            return context.getUser();
+        },
     },
     Mutation: {
         createUser: (parent, args, { models }) => {
@@ -22,10 +25,14 @@ export default {
                 });
             })
         },
-        login: async (parent, { email, password }, { models, authenticate, login }) => {
-            const { user } = await authenticate("graphql-local", { email, password })
+        login: async (parent, { email, password }, { req, authenticate, login }) => {
+            const { user, info } = await authenticate("graphql-local", { email, password })
             login(user);
             return user;
+        },
+        logout: async (parent, { email, password }, { logout }) => {
+            await logout();
+            return {success: true};
         }
     },
 };

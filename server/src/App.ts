@@ -1,6 +1,4 @@
 import express from "express";
-import { buildSchema } from "graphql";
-import graphqlHTTP, { Middleware } from "express-graphql";
 import { mergeTypes, mergeResolvers, fileLoader } from "merge-graphql-schemas";
 import path from "path";
 import { makeExecutableSchema } from "graphql-tools";
@@ -10,8 +8,10 @@ import cors from "cors";
 import passport from "passport";
 import { GraphQLLocalStrategy, buildContext } from "graphql-passport";
 import bcrypt from "bcrypt";
-import cookieSession from "cookie-session";
 import { ApolloServer } from "apollo-server-express";
+import session from 'express-session';
+import { v4 as uuidv4 } from 'uuid';
+import cookieSession from "cookie-session";
 
 passport.use(new GraphQLLocalStrategy((email, password, done) => {
     //@ts-ignore
@@ -31,6 +31,16 @@ passport.use(new GraphQLLocalStrategy((email, password, done) => {
     });
 }))
 
+passport.serializeUser(function (user: any, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+    //@ts-ignore
+    const user = await models.User.findOne({ where: { id } });
+    done(null, user);
+});
+
 const server = express();
 server.use(cors({
     origin: 'http://localhost:8080',
@@ -39,13 +49,14 @@ server.use(cors({
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
-server.use(cookieSession({
-    name: "nenos",
-    keys: [
-        "key1", "key2"
-    ]
-}));
+server.use(session({
+    genid: (req) => uuidv4(),
+    secret: "changeMeLater",
+    resave: false,
+    saveUninitialized: false,
+  }));
 server.use(passport.initialize());
+server.use(passport.session());
 
 server.get('/', (req, res) => {
     res.send("Alive");
@@ -64,7 +75,10 @@ const apollo = new ApolloServer({
     context: ({ req, res }) => buildContext({ req, res, models })
 });
 
-apollo.applyMiddleware({app: server});
+apollo.applyMiddleware({app: server, cors: {
+    credentials: true,
+    origin: true,
+} });
 
 function startServer() {
     server.listen(3000, (error) => {

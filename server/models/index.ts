@@ -6,6 +6,7 @@ const sequelize = new Sequelize("nenos", "admin", "123", {
 });
 const models = {
     User: sequelize.import("./User"),
+    Friend: sequelize.import("./Friend"),
     sequelize,
 }
 

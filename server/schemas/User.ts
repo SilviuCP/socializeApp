@@ -1,4 +1,4 @@
-import gql  from "graphql-tag";
+import gql from "graphql-tag";
 
 export default gql`
   type User {
@@ -14,5 +14,6 @@ export default gql`
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User!
     login(email: String!, password: String!): User!
+    logout(): {success: Boolean}
   }
 `;

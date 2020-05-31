@@ -7,7 +7,7 @@
     "compile": "tsc",
     "start": "node dist/App.js",
     "ts-node": "ts-node src/App.ts",
-    "dev": "nodemon --exec npm run ts-node --watch src -e ts"
+    "dev": "nodemon ./src/App.ts"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +37,8 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
-    "sequelize": "^5.21.11"
+    "passport-local": "^1.0.0",
+    "sequelize": "^5.21.11",
+    "uuid": "^8.1.0"
   }
 }
