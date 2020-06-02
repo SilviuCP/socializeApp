@@ -13,7 +13,7 @@ const logoutQuery = gql`mutation {
 
 export const Header = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [logout, { loading, data }] = useLazyQuery(logoutQuery);
+    const [logout, { loading, data }] = useMutation(logoutQuery);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -36,7 +36,11 @@ export const Header = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <div className="Right">
-                            <Button aria-controls="simple-menu" color="inherit" aria-haspopup="true" onClick={handleClick}>
+                            <AccountCircleIcon  className="User"/>
+                            <Typography className="User" variant="subtitle1" color="inherit">
+                                My Social Network
+                            </Typography>
+                            <Button className="Menu" aria-controls="simple-menu" color="inherit" aria-haspopup="true" onClick={handleClick}>
                                 <MenuIcon />
                             </Button>
                             <Menu
@@ -47,7 +51,7 @@ export const Header = () => {
                                 onClose={handleClose}
                             >
                                 <MenuItem onClick={() => window.location.href = '/profile'}>Profile</MenuItem>
-                                <MenuItem onClick={() => { logout({}); window.location.href = '/' }}>Logout</MenuItem>
+                                <MenuItem onClick={() => logout({})}>Logout</MenuItem>
                             </Menu>
                             {/* <AccountCircleIcon />
                             <Typography className="User" variant="subtitle1" color="inherit">

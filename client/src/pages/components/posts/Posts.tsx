@@ -15,9 +15,11 @@ export const Posts = (props: Props) => {
     return <div className="Post">
         <Card className="CardSpace">
             <div className="Post__PostedCards">
-                <Avatar className="Avatar" src="https://www.oneworldplayproject.com/wp-content/uploads/2016/03/avatar-1024x1024.jpg" />
-                <div className="Author">
-                    {props.post.username}
+                <div className="PostHeader">
+                    <Avatar className="Avatar" src="https://www.oneworldplayproject.com/wp-content/uploads/2016/03/avatar-1024x1024.jpg" />
+                    <div className="Author">
+                        {props.post.username}
+                    </div>
                 </div>
                 <div>
                     {props.post.image != undefined ? <img className="Image" src={props.post.image} /> : null}
@@ -25,11 +27,11 @@ export const Posts = (props: Props) => {
                     <div className="LikesAndCommentsSection">
                         <div className="Likes">
                             <ThumbUpAltIcon className="Icon" />
-                            <div className="Icon">{props.post.likes} Likes</div>
+                            <div className="Text">{props.post.likes} Likes</div>
                         </div>
                         <div className="Comments">
                             <CommentIcon className="Icon" />
-                            <div className="Icon">{props.post.comments} Comments</div>
+                            <div className="Text">{props.post.comments} Comments</div>
                         </div>
                     </div>
                 </div>

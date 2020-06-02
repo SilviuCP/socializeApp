@@ -8,40 +8,28 @@ import { DefaultAvatar } from "../../models/DefaultAvatar";
 import { User } from "src/models/User";
 import { NewPost } from "../components/newPost/NewPost";
 import { gql } from "apollo-boost";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useQuery } from "@apollo/react-hooks";
 import { useState } from "react";
 import { NavigationTab } from "../components/navigationTab/NavigationTab";
 
-const posts = [
-    {
-        id: 1,
-        user_id: 1,
-        username: "Mac Miller",
-        visibility: true,
-        image: "https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg",
-        description: "vacation",
-        likes: 3,
-    },
-    {
-        id: 2,
-        user_id: 2,
-        username: "Mac Miller",
-        visibility: true,
-        description: "vacation",
-    }
-]
-
 const getMyPosts = gql`query {
     getMyPosts{
-        post
+        id,
+        user_id,
+        username,
+        visibility,
+        image,
+        description
     }
   }`
-  
+
 
 export const Feed = () => {
-    const [myPosts, { data }] = useLazyQuery(getMyPosts);
-    const [posts, setPosts] = useState([]);
-    //  setPosts(posts => [...posts, myPosts({})]);
+    const { data, loading, error } = useQuery(getMyPosts);
+
+    if (loading) return <p>Loading</p>;
+    if (error) return <p>ERROR</p>;
+    if (!data) return <p>Not found</p>
 
     return <div>
         <Grid justify="center" container>
@@ -53,8 +41,8 @@ export const Feed = () => {
             </Grid>
             <Grid item xs={6}>
                 <Container className="ProfilePage" maxWidth="sm">
-                    <NewPost/>
-                    {posts.map((el, index) => {
+                    <NewPost />
+                    {data.getMyPosts.map((el, index) => {
                         return <div key={index}>
                             <Posts
                                 post={el} />
@@ -63,8 +51,8 @@ export const Feed = () => {
                 </Container>
             </Grid>
             <Grid item xs={3}>
-                
-                </Grid>
+
+            </Grid>
         </Grid>
     </div>
 }

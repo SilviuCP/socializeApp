@@ -14,9 +14,7 @@ const loginQuery = gql`mutation UserLogin($email: String!, $password: String!){
   }`;
 
 const meQuery = gql`query {
-    me{
-      email
-    }
+    me
   }`
 
 export const Login = () => {
@@ -67,6 +65,13 @@ export const Login = () => {
                         color="primary"
                         onClick={() => login({})}>
                         Sign In
+                        </Button>
+                        <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {getMe({});{console.log("data", data)}}}>
+                        ME 
                         </Button>
                     <Grid container className="LoginPage__Links">
                         <Grid item xs>

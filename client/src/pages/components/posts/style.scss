@@ -1,5 +1,4 @@
 .Post {
-    display: flex;
     flex-direction: row;
     top: 25%;
     left: 50%;
@@ -9,10 +8,7 @@
         margin-top: 1rem;
     }
 
-
-
     .Post__PostedCards {
-        display: flex;
         flex-wrap: wrap;
 
         .Image {
@@ -20,6 +16,9 @@
             max-height: 100%;
         }
 
+        .PostHeader {
+            display: flex;
+        }
         .Avatar {
             margin-top: 0.25rem;
             margin-left: 0.25rem;
@@ -37,7 +36,6 @@
         .Description {
             flex-wrap: wrap;
             margin-left: 1rem;
-            
         }
     }
     .LikesAndCommentsSection {
@@ -47,7 +45,10 @@
             float: left;
             cursor: pointer;
             .Icon {
-                margin-left: 1rem;
+                margin: 0 1rem;
+            }
+            .Text {
+                margin-top: 0.125rem;
             }
         }
         .Comments {
@@ -56,7 +57,10 @@
             float: right;
             cursor: pointer;
             .Icon {
-                margin-left: 1rem;
+                margin: 0 1rem;
+            }
+            .Text {
+                margin-top: 0.125rem;
             }
         }
     }

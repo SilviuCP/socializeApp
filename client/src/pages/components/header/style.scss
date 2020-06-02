@@ -4,15 +4,18 @@
     .Right {
         display: inline-flex;
         float: right;
-        padding-top: 0.5rem;
         .User {
+            padding-top: 0.75rem;
             margin: 0rem 0.5rem
+        }
+        .Menu {
+            padding-top: 0.75rem; 
         }
     }
 
     .Left {
         cursor: pointer;
-        padding-top: 0.25rem;
+        padding-top: 0.5rem;
     }
 
 }
