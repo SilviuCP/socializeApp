@@ -5,8 +5,10 @@ export default {
         getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
         allUsers: (parent, args, { models }) => models.User.findAll(),
         me: (parent, args, context) => {
-            console.log(context.getUser());
-            return context.getUser();
+            if (context.getUser().username){
+                return true;
+            }
+            return false;
         },
     },
     Mutation: {
@@ -32,7 +34,7 @@ export default {
         },
         logout: async (parent, { email, password }, { logout }) => {
             await logout();
-            return {success: true};
+            return true;
         }
     },
 };

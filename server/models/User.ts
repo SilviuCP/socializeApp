@@ -1,5 +1,9 @@
 export default (sequelize, DataTypes) => {
     const User = sequelize.define('user', {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      },
       username: {
         type: DataTypes.STRING,
         unique: true,
@@ -8,6 +12,7 @@ export default (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         unique: true,
       },
+      avatar: DataTypes.STRING,
       password: DataTypes.STRING,
     });
   
