@@ -1,0 +1,24 @@
+.PagesTab {
+    float: right;
+    margin-top: 1rem;
+
+    .Items {
+        margin: 0.5rem;
+        display: flex;
+    }
+    .Items:hover {
+        background-color: #a2a2a2;
+    }
+
+    .Icons {
+        margin-top: 0.125rem;
+        cursor: pointer;
+    }
+
+    .Text {
+        cursor: pointer;
+        margin-top: 0.25rem;
+        margin-left: 0.5rem;
+        font-size: 1.25rem;
+    }
+}

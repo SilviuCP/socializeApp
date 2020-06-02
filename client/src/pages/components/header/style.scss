@@ -1,0 +1,18 @@
+.Header {
+    background-color:#38761d;
+    
+    .Right {
+        display: inline-flex;
+        float: right;
+        padding-top: 0.5rem;
+        .User {
+            margin: 0rem 0.5rem
+        }
+    }
+
+    .Left {
+        cursor: pointer;
+        padding-top: 0.25rem;
+    }
+
+}

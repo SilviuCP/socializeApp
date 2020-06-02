@@ -1,0 +1,26 @@
+.ProfilePage__PostNewCard {
+    position: relative;
+    display: flex;
+    .button {
+        margin-right: 0.25rem;
+        float: right;
+        position: absolute;
+        margin-bottom: 0.25rem;
+        right: 0rem;
+        cursor: pointer;
+    }
+    .textField {
+        width: 85%;
+        margin-top: 0.75rem;
+        border-bottom: none;
+    }
+    .Avatar {
+        margin-top: 0.25rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+    }
+    .CardSpace {
+        margin-top: 1rem;
+    }
+
+}

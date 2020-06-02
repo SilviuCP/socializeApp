@@ -8,6 +8,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloProvider } from 'react-apollo';
 import { Profile } from './pages/profile/Profile';
+import { Feed } from './pages/feed/Feed';
+import { Friends } from './pages/friends/Friends';
 
 
 export const client = new ApolloClient({
@@ -25,6 +27,8 @@ class App extends React.Component {
                         <Route exact={true} path="/" component={Login} />
                         <Route path="/register" component={Register} />
                         <Route path="/profile" component={Profile} />
+                        <Route path="/feed" component={Feed} />
+                        <Route path="/friends" component={Friends} />
                     </Switch>
                 </BrowserRouter>
             </ApolloProvider>

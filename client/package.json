@@ -28,6 +28,8 @@
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
     "scss-loader": "0.0.1"
   },
