@@ -5,7 +5,7 @@ export default {
         getUser: (parent, { id }, { models }) => models.User.findOne({ where: { id } }),
         allUsers: (parent, args, { models }) => models.User.findAll(),
         me: (parent, args, context) => {
-            if (context.getUser().username){
+            if (context.getUser()){
                 return true;
             }
             return false;
@@ -32,8 +32,8 @@ export default {
             login(user);
             return user;
         },
-        logout: async (parent, { email, password }, { logout }) => {
-            await logout();
+        logout: async (parent, args, context) => {
+            await context.logout();
             return true;
         }
     },

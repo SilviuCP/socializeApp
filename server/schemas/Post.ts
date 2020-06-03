@@ -11,8 +11,8 @@ export default gql`
   }
   type Query {
     # getPost(id: Int!): Post!
-    getMyPosts(user_id: Int!): [Post!]!
-    getAvailablePosts: [Post!]!
+    getMyPosts: [Post!]!
+    # getAllAvailablePosts: [Post!]!
   }
   type Mutation {
     createPost(user_id: Int, username: String, visibility: Boolean!, image: String, description: String): Post!

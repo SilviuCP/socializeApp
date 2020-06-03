@@ -1,7 +1,7 @@
 export default {
     Query: {
         // getAllPosts: (parent, { id }, { models }) => models.Post.findAll(),
-        getAvailablePosts: (parent, args, { models }) => models.Post.find((post) => post.user_id === args.user_id),
+        // getAllAvailablePosts: (parent, args, context) => context.models.Post.findAll({}, (post) => post.user_id == context.user_id),
         getMyPosts: (parent, args, context) => context.models.Post.findAll({}, (post) => post.user_id == context.user_id),
     },
     Mutation: {
