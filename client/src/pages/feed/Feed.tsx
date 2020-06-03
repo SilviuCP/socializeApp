@@ -11,6 +11,8 @@ import { gql } from "apollo-boost";
 import { useLazyQuery, useQuery } from "@apollo/react-hooks";
 import { useState } from "react";
 import { NavigationTab } from "../components/navigationTab/NavigationTab";
+import { PostModel } from "../../models/PostModel";
+
 
 const getMyPosts = gql`query {
     getMyPosts{
@@ -25,11 +27,21 @@ const getMyPosts = gql`query {
 
 
 export const Feed = () => {
+    const [posts, setPosts] = useState<PostModel[]>([]);
     const { data, loading, error } = useQuery(getMyPosts);
-
-    if (loading) return <p>Loading</p>;
-    if (error) return <p>ERROR</p>;
-    if (!data) return <p>Not found</p>
+    
+    React.useEffect(() => {
+        if(!loading){
+            setPosts(data.getMyPosts)
+        }
+    },[data])
+    
+    const addPost = (post: PostModel) => {
+        setPosts([
+            ...posts,
+            post
+        ])
+    };
 
     return <div>
         <Grid justify="center" container>
@@ -41,9 +53,10 @@ export const Feed = () => {
             </Grid>
             <Grid item xs={6}>
                 <Container className="ProfilePage" maxWidth="sm">
-                    <NewPost />
-                    {data.getMyPosts.map((el, index) => {
-                        return <div key={index}>
+                    <NewPost 
+                    updatePostList={addPost}/>
+                    {posts.map((el) => {
+                        return <div key={el.id}>
                             <Posts
                                 post={el} />
                         </div>

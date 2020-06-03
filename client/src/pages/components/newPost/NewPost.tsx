@@ -11,24 +11,34 @@ import { useState } from "react";
 import { gql } from "apollo-boost";
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 
+interface Props {
+    updatePostList: (post) => void;
+}
+
 const createPostQuery = gql`mutation CreateNewPost($description: String, $image: String, $visibility: Boolean!){  
     createPost(description: $description, image: $image, visibility: $visibility){
-        id, username, visibility, image, description
+        id, user_id, username, visibility, image, description
   }
   }`;
 
 
-export const NewPost = () => {
+export const NewPost = (props: Props) => {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [visibility, setVisibility] = useState(true);
-    const [createPost] = useMutation(createPostQuery, {
+    const [createPost, mutationData] = useMutation(createPostQuery, {
         variables: {
             description: description,
             image: image,
             visibility: visibility
         }
     });
+
+    React.useEffect(() => {
+        if(!mutationData.loading && mutationData.data){
+            props.updatePostList(mutationData.data.createPost)
+        }
+    },[mutationData])
     return <div>
         <Card className="CardSpace">
             <div className="ProfilePage__PostNewCard">

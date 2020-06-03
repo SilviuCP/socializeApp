@@ -51,7 +51,7 @@ export const Header = () => {
                                 onClose={handleClose}
                             >
                                 <MenuItem onClick={() => window.location.href = '/profile'}>Profile</MenuItem>
-                                <MenuItem onClick={() => logout({})}>Logout</MenuItem>
+                                <MenuItem onClick={() => {logout({}); window.location.reload()}}>Logout</MenuItem>
                             </Menu>
                             {/* <AccountCircleIcon />
                             <Typography className="User" variant="subtitle1" color="inherit">

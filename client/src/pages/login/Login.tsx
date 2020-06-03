@@ -5,6 +5,7 @@ import { client } from '../../App';
 import { gql } from "apollo-boost";
 import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 const loginQuery = gql`mutation UserLogin($email: String!, $password: String!){  
     login(email: $email, password: $password){
@@ -13,23 +14,22 @@ const loginQuery = gql`mutation UserLogin($email: String!, $password: String!){
     }
   }`;
 
-const meQuery = gql`query {
-    me
-  }`
 
 export const Login = () => {
-    const [getMe, { loading, data }] = useLazyQuery(meQuery);
-    React.useEffect(() => {
-        console.log(data);
-    })
+    const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [login] = useMutation(loginQuery, {
+    const [login, mutationData] = useMutation(loginQuery, {
         variables: {
             email: email,
             password: password
-                            }
+        }
     });
+    React.useEffect(() => {
+        if (mutationData.data) {
+            history.push("/feed");
+        }
+    })
 
     return <div className="LoginPage">
         <Container maxWidth="xs">
@@ -66,13 +66,7 @@ export const Login = () => {
                         onClick={() => login({})}>
                         Sign In
                         </Button>
-                        <Button
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        onClick={() => {getMe({});{console.log("data", data)}}}>
-                        ME 
-                        </Button>
+
                     <Grid container className="LoginPage__Links">
                         <Grid item xs>
                             <Link href="/register" variant="body2">
